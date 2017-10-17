@@ -174,4 +174,6 @@
         <module>rpc-register</module>
         <module>rpc-common</module>
     </modules>
+
+    <!--https://my.oschina.net/huangyong/blog/361751-->
 </project>

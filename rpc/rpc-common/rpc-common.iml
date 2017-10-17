@@ -14,5 +14,9 @@
     <orderEntry type="library" name="Maven: org.apache.commons:commons-lang3:3.3.2" level="project" />
     <orderEntry type="library" name="Maven: org.apache.commons:commons-collections4:4.0" level="project" />
     <orderEntry type="library" name="Maven: io.netty:netty-all:4.0.24.Final" level="project" />
+    <orderEntry type="library" name="Maven: com.dyuproject.protostuff:protostuff-core:1.0.8" level="project" />
+    <orderEntry type="library" name="Maven: com.dyuproject.protostuff:protostuff-api:1.0.8" level="project" />
+    <orderEntry type="library" name="Maven: com.dyuproject.protostuff:protostuff-runtime:1.0.8" level="project" />
+    <orderEntry type="library" name="Maven: com.dyuproject.protostuff:protostuff-collectionschema:1.0.8" level="project" />
   </component>
 </module>
