@@ -154,5 +154,6 @@
         <!--<module>rpc-api</module>-->
         <module>rpc-server</module>
         <module>rpc-sample-api</module>
+        <module>rpc-basic-server</module>
     </modules>
 </project>
