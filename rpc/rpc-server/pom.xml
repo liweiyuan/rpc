@@ -24,6 +24,13 @@
             <version>3.8.1</version>
             <scope>test</scope>
         </dependency>
+
+        <!--spring Context-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
+
         <!--rpc-sample-api-->
         <dependency>
             <groupId>com.baidu</groupId>
@@ -35,6 +42,12 @@
         <dependency>
             <groupId>com.baidu</groupId>
             <artifactId>rpc-basic-server</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <!--rpc-zookeeper-register-->
+        <dependency>
+            <groupId>com.baidu</groupId>
+            <artifactId>rpc-zookeeper-register</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>

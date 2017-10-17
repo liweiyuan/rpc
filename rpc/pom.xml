@@ -14,8 +14,11 @@
         <version.maven-surefire-plugin>2.18.1</version.maven-surefire-plugin>
         <version.maven-source-plugin>2.4</version.maven-source-plugin>
         <version.maven-javadoc-plugin>2.10.3</version.maven-javadoc-plugin>
+        <version.slf4j>1.7.7</version.slf4j>
     </properties>
 
+    <!--这个标签可以使子模块服用父模块的jar包-->
+    <dependencyManagement>
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -27,7 +30,7 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
-            <version>1.7.7</version>
+            <version>${version.slf4j}</version>
         </dependency>
         <!-- Spring -->
         <dependency>
@@ -87,8 +90,14 @@
             <artifactId>cglib</artifactId>
             <version>3.1</version>
         </dependency>
+        <!-- ZkClient -->
+        <dependency>
+            <groupId>com.101tec</groupId>
+            <artifactId>zkclient</artifactId>
+            <version>0.4</version>
+        </dependency>
     </dependencies>
-
+    </dependencyManagement>
     <build>
         <plugins>
             <!-- Compiler -->
