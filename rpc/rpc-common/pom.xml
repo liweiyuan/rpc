@@ -7,10 +7,10 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>rpc-basic-server</artifactId>
+    <artifactId>rpc-common</artifactId>
     <packaging>jar</packaging>
 
-    <name>rpc-basic-server</name>
+    <name>rpc-common</name>
     <url>http://maven.apache.org</url>
 
     <properties>
@@ -24,33 +24,15 @@
             <version>3.8.1</version>
             <scope>test</scope>
         </dependency>
-
-        <!--spring context-->
+        <!-- Apache Commons Lang -->
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
         </dependency>
-        <!--SLF4J-->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-        </dependency>
-        <!--rpc-register-->
-        <dependency>
-            <groupId>com.baidu</groupId>
-            <artifactId>rpc-register</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <!--Apache Commons Collections-->
+        <!-- Apache Commons Collections -->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-collections4</artifactId>
-        </dependency>
-        <!--rpc-common-->
-        <dependency>
-            <groupId>com.baidu</groupId>
-            <artifactId>rpc-common</artifactId>
-            <version>1.0-SNAPSHOT</version>
         </dependency>
         <!--netty-->
         <dependency>

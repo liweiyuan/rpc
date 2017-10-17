@@ -96,6 +96,12 @@
             <artifactId>zkclient</artifactId>
             <version>0.4</version>
         </dependency>
+        <!-- Apache Commons Lang -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.3.2</version>
+        </dependency>
     </dependencies>
     </dependencyManagement>
     <build>
@@ -166,5 +172,6 @@
         <module>rpc-basic-server</module>
         <module>rpc-zookeeper-register</module>
         <module>rpc-register</module>
+        <module>rpc-common</module>
     </modules>
 </project>

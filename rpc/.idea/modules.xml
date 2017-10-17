@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/rpc.iml" filepath="$PROJECT_DIR$/rpc.iml" />
       <module fileurl="file://$PROJECT_DIR$/rpc-basic-server/rpc-basic-server.iml" filepath="$PROJECT_DIR$/rpc-basic-server/rpc-basic-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rpc-common/rpc-common.iml" filepath="$PROJECT_DIR$/rpc-common/rpc-common.iml" />
       <module fileurl="file://$PROJECT_DIR$/rpc-register/rpc-register.iml" filepath="$PROJECT_DIR$/rpc-register/rpc-register.iml" />
       <module fileurl="file://$PROJECT_DIR$/rpc-sample-api/rpc-sample-api.iml" filepath="$PROJECT_DIR$/rpc-sample-api/rpc-sample-api.iml" />
       <module fileurl="file://$PROJECT_DIR$/rpc-server/rpc-sample-server.iml" filepath="$PROJECT_DIR$/rpc-server/rpc-sample-server.iml" />
