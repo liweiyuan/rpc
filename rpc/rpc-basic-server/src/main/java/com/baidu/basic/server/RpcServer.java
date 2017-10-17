@@ -1,14 +1,17 @@
 package com.baidu.basic.server;
 
+import com.baidu.common.bean.RpcRequest;
+import com.baidu.common.bean.RpcResponse;
+import com.baidu.common.codec.RpcDecoder;
+import com.baidu.common.codec.RpcEncoder;
 import com.baidu.common.util.StringUtil;
 import com.baidu.register.ServiceRegistry;
 import io.netty.bootstrap.ServerBootstrap;
-import io.netty.channel.ChannelInitializer;
-import io.netty.channel.ChannelPipeline;
-import io.netty.channel.EventLoopGroup;
+import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.util.concurrent.Future;
 import org.apache.commons.collections4.MapUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,23 +54,43 @@ public class RpcServer implements ApplicationContextAware, InitializingBean {
     @Override
     public void afterPropertiesSet() throws Exception {
         //netty处理逻辑
-        EventLoopGroup bossGroup=new NioEventLoopGroup();
-        EventLoopGroup workerGroup=new NioEventLoopGroup();
+        EventLoopGroup bossGroup = new NioEventLoopGroup();
+        EventLoopGroup workerGroup = new NioEventLoopGroup();
         try {
             // 创建并初始化 Netty 服务端 Bootstrap 对象
-            ServerBootstrap bootstrap=new ServerBootstrap();
-            bootstrap.group(bossGroup,workerGroup);
+            ServerBootstrap bootstrap = new ServerBootstrap();
+            bootstrap.group(bossGroup, workerGroup);
             bootstrap.channel(NioServerSocketChannel.class);
             bootstrap.childHandler(new ChannelInitializer<SocketChannel>() {
                 @Override
                 protected void initChannel(SocketChannel socketChannel) throws Exception {
-                    ChannelPipeline channelPipeline=socketChannel.pipeline();
-                    //channelPipeline.addLast(new RpcDecoder(RpcRequest.class)); // 解码 RPC 请求
-                    //channelPipeline.addLast(new RpcEncoder(RpcResponse.class)); // 编码 RPC 响应
-                    //channelPipeline.addLast(new RpcServerHandler(handlerMap)); // 处理 RPC 请求
+                    ChannelPipeline channelPipeline = socketChannel.pipeline();
+                    channelPipeline.addLast(new RpcDecoder(RpcRequest.class)); // 解码 RPC 请求
+                    channelPipeline.addLast(new RpcEncoder(RpcResponse.class)); // 编码 RPC 响应
+                    channelPipeline.addLast(new RpcServerHandler(handlerMap)); // 处理 RPC 请求
                 }
             });
-        }finally {
+            //
+            bootstrap.option(ChannelOption.SO_BACKLOG, 1024);
+            bootstrap.childOption(ChannelOption.SO_KEEPALIVE, true);
+            //获取RPC服务的ip与端口
+            String[] addressArray = serviceAddress.split(":");
+            String ip = addressArray[0];
+            int port = Integer.parseInt(addressArray[1]);
+            // 启动 RPC 服务器
+            ChannelFuture future = bootstrap.bind(ip, port).sync();
+            if (serviceRegistry != null) {
+                for (String interfaceName : handlerMap.keySet()) {
+                    serviceRegistry.register(interfaceName, serviceAddress);
+                    LOGGER.debug("register service: {} => {}", interfaceName, serviceAddress);
+                }
+            }
+            LOGGER.debug("server started on port {}", port);
+            // 关闭 RPC 服务器
+            future.channel().closeFuture();
+
+            System.out.println("server start on port "+port);
+        } finally {
             workerGroup.shutdownGracefully();
             bossGroup.shutdownGracefully();
         }
@@ -81,12 +104,12 @@ public class RpcServer implements ApplicationContextAware, InitializingBean {
         if (MapUtils.isNotEmpty(serviceBeanMap)) {
             for (Object serviceBean : serviceBeanMap.values()) {
                 RpcService rpcService = serviceBean.getClass().getAnnotation(RpcService.class);
-                String serviceName=rpcService.value().getName();
-                String serviceVersion=rpcService.version();
-                if(StringUtil.isNotEmpty(serviceVersion)){
-                    serviceName+="-"+serviceVersion;
+                String serviceName = rpcService.value().getName();
+                String serviceVersion = rpcService.version();
+                if (StringUtil.isNotEmpty(serviceVersion)) {
+                    serviceName += "-" + serviceVersion;
                 }
-                handlerMap.put(serviceName,serviceBean);
+                handlerMap.put(serviceName, serviceBean);
             }
         }
     }

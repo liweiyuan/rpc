@@ -1,5 +1,6 @@
 package com.baidu.common.util;
 
+import com.dyuproject.protostuff.LinkedBuffer;
 import com.dyuproject.protostuff.ProtostuffIOUtil;
 import com.dyuproject.protostuff.Schema;
 import com.dyuproject.protostuff.runtime.RuntimeSchema;
@@ -43,10 +44,21 @@ public class SerializationUtil {
 
     }
 
-
     /**
      * 序列化（对象 -> 字节数组）
      */
+    public static <T> byte[] serialize(T obj) {
+        Class<T> cls = (Class<T>) obj.getClass();
+        LinkedBuffer linkedBuffer = LinkedBuffer.allocate(LinkedBuffer.DEFAULT_BUFFER_SIZE);
+        try {
+            Schema<T> schema = getSchema(cls);
+            return ProtostuffIOUtil.toByteArray(obj, schema, linkedBuffer);
+        } catch (Exception e) {
+            throw new IllegalStateException(e.getMessage(), e);
+        } finally {
+            linkedBuffer.clear();
+        }
+    }
 
     private static <T> Schema<T> getSchema(Class<T> genericClass) {
         Schema<T> schema = (Schema<T>) cachedSchema.get(genericClass);
@@ -56,4 +68,6 @@ public class SerializationUtil {
         }
         return schema;
     }
+
+
 }

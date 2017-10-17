@@ -13,5 +13,8 @@
     </bean>
 
     <!--rpc Server-->
-    <bean id="rpcServer" class="com.baidu.basic.server.RpcServer"></bean>
+    <bean id="rpcServer" class="com.baidu.basic.server.RpcServer">
+        <constructor-arg name="serviceAddress" value="${rpc.service_address}"/>
+        <constructor-arg name="serviceRegistry" ref="serviceRegister"/>
+    </bean>
 </beans>
