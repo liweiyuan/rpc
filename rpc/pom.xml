@@ -155,5 +155,7 @@
         <module>rpc-server</module>
         <module>rpc-sample-api</module>
         <module>rpc-basic-server</module>
+        <module>rpc-zookeeper-register</module>
+        <module>rpc-register</module>
     </modules>
 </project>
