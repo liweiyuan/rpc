@@ -70,7 +70,7 @@ public class RpcProxy {
                         RpcClient rpcClient=new RpcClient(ip,port);
                         long time=System.currentTimeMillis();
                         RpcResponse response=rpcClient.send(request);
-                        return null;
+                        return response;
                     }
                 });
     }

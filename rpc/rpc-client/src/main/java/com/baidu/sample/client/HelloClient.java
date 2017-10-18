@@ -18,5 +18,7 @@ public class HelloClient {
 
         //获取服务类
         HelloService helloService=rpcProxy.create(HelloService.class);
+        String result=helloService.hello("world");
+        System.out.println(result);
     }
 }
