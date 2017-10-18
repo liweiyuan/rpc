@@ -45,11 +45,11 @@ public class ZookeeperServiceDiscovery implements ServiceDiscovery {
             String address;
             int size = addressList.size();
             if (size == 1) {
-                //若果只有一个节点，则获取
+                //如果只有一个节点，则获取
                 address = addressList.get(0);
                 LOGGER.debug("get only address node: {}", address);
             } else {
-                //若果只有一个节点，则随机获取一个
+                //如果只有一个节点，则随机获取一个
                 address = addressList.get(ThreadLocalRandom.current().nextInt(size));
                 LOGGER.debug("get random address node: {}", address);
             }

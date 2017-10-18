@@ -11,4 +11,9 @@
     <bean id="serviceDiscovery" class="com.baidu.zookeeper.discovery.ZookeeperServiceDiscovery">
         <constructor-arg name="zkAddress" value="${rpc.register.address}"/>
     </bean>
+
+    <!--代理类-->
+    <bean id="rpcProxy" class="com.baidu.rpc.proxy.RpcProxy">
+        <constructor-arg name="serviceDiscovery" ref="serviceDiscovery"/>
+    </bean>
 </beans>
