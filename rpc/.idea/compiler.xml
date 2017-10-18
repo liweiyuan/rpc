@@ -10,19 +10,16 @@
         <module name="rpc-common" />
         <module name="rpc-register" />
         <module name="rpc-sample-api" />
-        <module name="rpc-sample-server" />
         <module name="rpc-server" />
         <module name="rpc-zookeeper-register" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="rpc" target="1.7" />
-      <module name="rpc-api" target="1.7" />
       <module name="rpc-basic-server" target="1.7" />
       <module name="rpc-common" target="1.7" />
       <module name="rpc-register" target="1.7" />
       <module name="rpc-sample-api" target="1.7" />
-      <module name="rpc-sample-server" target="1.7" />
       <module name="rpc-server" target="1.7" />
       <module name="rpc-zookeeper-register" target="1.7" />
     </bytecodeTargetLevel>
