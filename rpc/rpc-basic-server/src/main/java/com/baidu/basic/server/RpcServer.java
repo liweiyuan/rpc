@@ -93,6 +93,9 @@ public class RpcServer implements ApplicationContextAware, InitializingBean {
         } finally {
             workerGroup.shutdownGracefully();
             bossGroup.shutdownGracefully();
+
+
+            
         }
     }
 
