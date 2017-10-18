@@ -173,6 +173,8 @@
         <module>rpc-zookeeper-register</module>
         <module>rpc-register</module>
         <module>rpc-common</module>
+        <module>rpc-client</module>
+        <module>rpc-proxy-client</module>
     </modules>
 
     <!--https://my.oschina.net/huangyong/blog/361751-->

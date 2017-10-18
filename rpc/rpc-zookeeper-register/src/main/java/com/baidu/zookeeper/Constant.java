@@ -1,4 +1,4 @@
-package com.baidu.zookeeper.register;
+package com.baidu.zookeeper;
 
 /**
  * Created by tingyun on 2017/10/17.

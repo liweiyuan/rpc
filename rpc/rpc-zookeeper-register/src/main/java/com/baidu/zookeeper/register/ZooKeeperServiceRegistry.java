@@ -5,6 +5,7 @@ package com.baidu.zookeeper.register;
  */
 
 import com.baidu.register.ServiceRegistry;
+import com.baidu.zookeeper.Constant;
 import org.I0Itec.zkclient.ZkClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

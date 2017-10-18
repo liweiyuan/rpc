@@ -7,10 +7,10 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>rpc-zookeeper-register</artifactId>
+    <artifactId>rpc-proxy-client</artifactId>
     <packaging>jar</packaging>
 
-    <name>rpc-zookeeper-register</name>
+    <name>rpc-proxy-client</name>
     <url>http://maven.apache.org</url>
 
     <properties>
@@ -24,31 +24,16 @@
             <version>3.8.1</version>
             <scope>test</scope>
         </dependency>
-        <!--register中心接口-->
-        <dependency>
-            <groupId>com.baidu</groupId>
-            <artifactId>rpc-register</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <!-- SLF4J -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-        </dependency>
-        <!-- ZooKeeper -->
-        <dependency>
-            <groupId>org.apache.zookeeper</groupId>
-            <artifactId>zookeeper</artifactId>
-        </dependency>
-        <!-- ZkClient -->
-        <dependency>
-            <groupId>com.101tec</groupId>
-            <artifactId>zkclient</artifactId>
-        </dependency>
         <!--rpc-common-->
         <dependency>
             <groupId>com.baidu</groupId>
             <artifactId>rpc-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <!--rpc-zookeeper-register-->
+        <dependency>
+            <groupId>com.baidu</groupId>
+            <artifactId>rpc-zookeeper-register</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>

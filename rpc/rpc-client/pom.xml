@@ -7,10 +7,10 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>rpc-zookeeper-register</artifactId>
+    <artifactId>rpc-client</artifactId>
     <packaging>jar</packaging>
 
-    <name>rpc-zookeeper-register</name>
+    <name>rpc-client</name>
     <url>http://maven.apache.org</url>
 
     <properties>
@@ -24,31 +24,26 @@
             <version>3.8.1</version>
             <scope>test</scope>
         </dependency>
-        <!--register中心接口-->
+        <!--spring context-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+        </dependency>
+        <!--rpc-sample-api-->
         <dependency>
             <groupId>com.baidu</groupId>
-            <artifactId>rpc-register</artifactId>
+            <artifactId>rpc-sample-api</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-        <!-- SLF4J -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-        </dependency>
-        <!-- ZooKeeper -->
-        <dependency>
-            <groupId>org.apache.zookeeper</groupId>
-            <artifactId>zookeeper</artifactId>
-        </dependency>
-        <!-- ZkClient -->
-        <dependency>
-            <groupId>com.101tec</groupId>
-            <artifactId>zkclient</artifactId>
-        </dependency>
-        <!--rpc-common-->
+        <!--代理类中存在对zookeeper中注册的服务的代理-->
+        <!--rpc-proxy-client-->
         <dependency>
             <groupId>com.baidu</groupId>
-            <artifactId>rpc-common</artifactId>
+            <artifactId>rpc-proxy-client</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
