@@ -4,6 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.util.concurrent.CountDownLatch;
+
 /**
  * Created by spark on 17-10-17.
  */

@@ -86,8 +86,8 @@ public class RpcServer implements ApplicationContextAware, InitializingBean {
                 }
             }
             LOGGER.debug("server started on port {}", port);
-            // 关闭 RPC 服务器
-            future.channel().closeFuture();
+            // 关闭 RPC 服务器--sync()表示阻塞
+            future.channel().closeFuture().sync();
 
             System.out.println("server start on port "+port);
         } finally {
@@ -95,7 +95,7 @@ public class RpcServer implements ApplicationContextAware, InitializingBean {
             bossGroup.shutdownGracefully();
 
 
-            
+
         }
     }
 
