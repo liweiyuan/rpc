@@ -8,6 +8,10 @@ public class RpcResponse {
     private Exception exception;
     private Object result;
 
+    public boolean hasException() {
+        return exception != null;
+    }
+
     public String getRequestId() {
         return requestId;
     }

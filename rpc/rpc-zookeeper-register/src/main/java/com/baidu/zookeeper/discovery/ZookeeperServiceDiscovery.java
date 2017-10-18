@@ -26,9 +26,9 @@ public class ZookeeperServiceDiscovery implements ServiceDiscovery {
 
     //发现注册的服务
     @Override
-    public String discove(String serviceName) {
+    public String discover(String serviceName) {
         //创建Zookeeper客户端
-        ZkClient zkClient = new ZkClient(serviceName, Constant.ZK_SESSION_TIMEOUT, Constant.ZK_CONNECTION_TIMEOUT);
+        ZkClient zkClient = new ZkClient(zkAddress, Constant.ZK_SESSION_TIMEOUT, Constant.ZK_CONNECTION_TIMEOUT);
         LOGGER.debug("connect zookeeper");
         try {
             //获取service节点

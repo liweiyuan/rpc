@@ -19,7 +19,7 @@ import java.util.UUID;
  */
 public class RpcProxy {
 
-    private static final Logger LOGGER= LoggerFactory.getLogger(RpcProxy.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(RpcProxy.class);
 
     private String serviceAddress;
     private ServiceDiscovery serviceDiscovery;
@@ -33,7 +33,7 @@ public class RpcProxy {
     }
 
     public <T> T create(Class<T> interfaceClass) {
-        return  create(interfaceClass,"");
+        return create(interfaceClass, "");
     }
 
     private <T> T create(final Class<T> interfaceClass, final String serviceVersion) {
@@ -43,7 +43,7 @@ public class RpcProxy {
                     @Override
                     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
                         //创建RPC请求对象并设置请求属性
-                        RpcRequest request=new RpcRequest();
+                        RpcRequest request = new RpcRequest();
                         request.setRequestId(UUID.randomUUID().toString());
                         request.setInterfaceName(method.getDeclaringClass().getName());
                         request.setMethodName(method.getName());
@@ -51,26 +51,35 @@ public class RpcProxy {
                         request.setParameterTypes(method.getParameterTypes());
                         request.setParameters(args);
                         //获取RPC服务
-                        if(serviceDiscovery!=null){
-                            String serviceName=interfaceClass.getName();
-                            if(StringUtil.isNotEmpty(serviceName)){
-                                serviceName+="-"+serviceVersion;
+                        if (serviceDiscovery != null) {
+                            String serviceName = interfaceClass.getName();
+                            if (StringUtil.isNotEmpty(serviceVersion)) {
+                                serviceName += "-" + serviceVersion;
                             }
-                            serviceAddress=serviceDiscovery.discove(serviceName);
+                            serviceAddress = serviceDiscovery.discover(serviceName);
                             LOGGER.debug("discover service: {} => {}", serviceName, serviceAddress);
                         }
-                        if(StringUtil.isEmpty(serviceAddress)){
+                        if (StringUtil.isEmpty(serviceAddress)) {
                             throw new RuntimeException("server address is empty");
                         }
                         // 从 RPC 服务地址中解析主机名与端口号
-                        String[] addressArray=serviceAddress.split(":");
-                        String ip= addressArray[0];
+                        String[] addressArray = serviceAddress.split(":");
+                        String ip = addressArray[0];
                         int port = Integer.parseInt(addressArray[1]);
                         // 创建 RPC 客户端对象并发送 RPC 请求
-                        RpcClient rpcClient=new RpcClient(ip,port);
-                        long time=System.currentTimeMillis();
-                        RpcResponse response=rpcClient.send(request);
-                        return response;
+                        RpcClient rpcClient = new RpcClient(ip, port);
+                        long time = System.currentTimeMillis();
+                        RpcResponse response = rpcClient.send(request);
+                        LOGGER.debug("time: {}ms", System.currentTimeMillis() - time);
+                        if (response == null) {
+                            throw new RuntimeException("response is null.");
+                        }
+                        //返回rpc结果
+                        if (response.hasException()) {
+                            throw response.getException();
+                        } else {
+                            return response.getResult();
+                        }
                     }
                 });
     }

@@ -40,7 +40,7 @@ public class RpcClient extends SimpleChannelInboundHandler<RpcResponse> {
 
     //发送请求，获取对应的响应
     public RpcResponse send(RpcRequest request) throws InterruptedException {
-        EventLoopGroup group = new NioEventLoopGroup(Runtime.getRuntime().availableProcessors());
+        EventLoopGroup group = new NioEventLoopGroup();
         try {
             //创建并初始化 Netty 客户端 Bootstrap 对象
             Bootstrap bootstrap = new Bootstrap();
@@ -56,8 +56,8 @@ public class RpcClient extends SimpleChannelInboundHandler<RpcResponse> {
                 }
             });
             bootstrap.option(ChannelOption.TCP_NODELAY, true);
-            // 连接 RPC 服务器
-            ChannelFuture future = bootstrap.bind(host, port).sync();
+            // 连接 RPC 服务器---修改为连接
+            ChannelFuture future = bootstrap.connect(host, port).sync();
             // 写入 RPC 请求数据并关闭连接
             Channel channel = future.channel();
             channel.writeAndFlush(request).sync();

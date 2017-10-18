@@ -10,5 +10,5 @@ public interface ServiceDiscovery {
      * 发现服务名称
      * @param serviceName
      */
-    String  discove(String serviceName);
+    String  discover(String serviceName);
 }
