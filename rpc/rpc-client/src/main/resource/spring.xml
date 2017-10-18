@@ -9,5 +9,6 @@
 
     <!--服务发现类-->
     <bean id="serviceDiscovery" class="com.baidu.zookeeper.discovery.ZookeeperServiceDiscovery">
+        <constructor-arg name="zkAddress" value="${rpc.register.address}"/>
     </bean>
 </beans>
