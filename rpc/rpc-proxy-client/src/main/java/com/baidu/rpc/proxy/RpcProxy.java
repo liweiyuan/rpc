@@ -32,11 +32,12 @@ public class RpcProxy {
         this.serviceDiscovery = serviceDiscovery;
     }
 
-    public <T> T create(Class<T> interfaceClass) {
+    public <T> T create( final Class<?> interfaceClass) {
         return create(interfaceClass, "");
     }
 
-    private <T> T create(final Class<T> interfaceClass, final String serviceVersion) {
+
+    public  <T> T create( final Class<?> interfaceClass, final String serviceVersion) {
         //创建动态代理对象
         return (T) Proxy.newProxyInstance(interfaceClass.getClassLoader(), new Class<?>[]{interfaceClass},
                 new InvocationHandler() {

@@ -2,29 +2,24 @@ package com.baidu.sample.client;
 
 import com.baidu.rpc.proxy.RpcProxy;
 import com.baidu.sample.api.HelloService;
+import com.baidu.sample.api.Person;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
- * Created by tingyun on 2017/10/18.
- *  rpc测试客户端
+ * Created by tingyun on 2017/10/19.
+ * 传参为一个对象
+ * @author tingyun
  */
-public class HelloClient {
+public class HelloClient2 {
 
     public static void main(String[] args) {
-        //1.
         ApplicationContext ctx=new ClassPathXmlApplicationContext("spring.xml");
-        RpcProxy rpcProxy = ctx.getBean(RpcProxy.class);
-
-        //获取服务类
+        RpcProxy rpcProxy= (RpcProxy) ctx.getBean("rpcProxy");
+        //获取服务
         HelloService helloService=rpcProxy.create(HelloService.class);
-        String result=helloService.hello("world");
+        String result=helloService.hello(new Person("wade","US"));
         System.out.println(result);
-
-        //获取服务类
-        HelloService helloService1=rpcProxy.create(HelloService.class,"sample.version2");
-        String result2=helloService1.hello("世界");
-        System.err.println(result2);
         System.exit(0);
     }
 }
