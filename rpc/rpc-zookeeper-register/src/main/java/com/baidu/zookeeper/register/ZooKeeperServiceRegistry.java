@@ -33,17 +33,22 @@ public class ZooKeeperServiceRegistry implements ServiceRegistry {
         String registerPath = Constant.ZK_REGISTRY_PATH;
         if (!zkClient.exists(registerPath)) {
             zkClient.createPersistent(registerPath);
-            LOGGER.debug("create registry node: {}", registerPath);
+            LOGGER.debug("create registry root node: {}", registerPath);
         }
         // 创建 service 节点（持久）
         String servicePath = registerPath + "/" + serviceName;
         if (!zkClient.exists(servicePath)) {
             zkClient.createPersistent(servicePath);
-            LOGGER.debug("create service node: {}", servicePath);
+            LOGGER.debug("create service persistent node: {}", servicePath);
         }
         // 创建 address 节点（临时）
         String addresspath = servicePath + "/address-";
         String addressNode = zkClient.createEphemeralSequential(addresspath, serviceAddress);
-        LOGGER.debug("create address node: {}", addressNode);
+        LOGGER.debug("create address Ephemeral node: {}", addressNode);
+
+
+        /**
+         * 数据读取从配置文件中，进行数据发布/订阅模式，比如dubbo，数据库配置等
+         */
     }
 }
